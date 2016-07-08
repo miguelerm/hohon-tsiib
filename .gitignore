@@ -186,7 +186,6 @@ ClientBin/
 *~
 *.dbmdl
 *.dbproj.schemaview
-*.pfx
 *.publishsettings
 node_modules/
 orleans.codegen.cs
@@ -243,3 +242,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+App/App_Data/CuestionarioFirmado*.pdf
