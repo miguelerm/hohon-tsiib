@@ -30,6 +30,13 @@ namespace HohonTsiib.App
                 var nombresDefirmas = campos.GetSignatureNames();
                 foreach (var nombre in nombresDefirmas)
                 {
+
+                    // Solo vamos a verificar la última revision.
+                    if (campos.GetRevision(nombre) != campos.TotalRevisions) continue;
+
+                    // Solo vamos a verificar si la firma es de todo el documento.
+                    if (!campos.SignatureCoversWholeDocument(nombre)) continue;
+
                     var firma = campos.VerifySignature(nombre);
 
                     if (!firma.Verify()) continue;
@@ -42,7 +49,7 @@ namespace HohonTsiib.App
                             try
                             {
                                 certificado.Verify(certificadoDeConfianza.GetPublicKey());
-                                // Si llega hasta aquí al menos una firma fue realizada con el certificado del sistema.
+                                // Si llega hasta aquí, es porque la última firma fue realizada con el certificado del sistema.
                                 return true;
                             }
                             catch (InvalidKeyException)
